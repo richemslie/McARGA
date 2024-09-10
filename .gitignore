@@ -1,0 +1,9 @@
+# temporary/backup files
+*~
+*.pyc
+*a.out
+__pycache__
+
+*.o
+*.d
+*.bin
