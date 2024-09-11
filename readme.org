@@ -8,7 +8,7 @@
 
 
 * progress
-  Benchmarking on the 160 subset of ARC public training set (400).
+  Benchmarking on the 160 ARGA subset of ARC public training set (400).
 
   |--------+--------+-----------+------------+-------+-----------+----------|
   | date   | passed | ~last_run | ~arga_orig | ~gpar | ~icecuber | ~ale_2nd |
