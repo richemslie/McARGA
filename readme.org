@@ -1,7 +1,12 @@
+* Update, 26-Sept-2024
+  Currently going through a major rework.  The MCTS/ARGA approach isn't going to make much progress
+  as it is, and looking for another level of abstraction.  A lot of the code appearing here will be
+  throwaway code from this point on, and only here to have a record of my thinking.  I have pretty
+  much given up on 2024 competition.
+
+
 * McARGA - Monte Carlo Abstract Reasoning with Graph Abstractions
-
   Working towards Kaggle's Abstraction and Reasoning Challenge - [[https://www.kaggle.com/competitions/arc-prize-2024][Arc Prize 2024]].
-
 
 ** background
    This is a fork of the ARGA project here [[https://github.com/khalil-research/ARGA-AAAI23][github]] and [[https://arxiv.org/abs/2210.09880][paper]].
@@ -52,21 +57,11 @@
 
        *#unique passes for MCARGA* / *#unique passes for ~solver*
 
-
-* status
-    This is currently in massive flux.  My goal was to use MCTS to perform expert
-    iteration/A0-style learning with an LLM. As it stands, this is months away (if possible at
-    all), and I'm moving towards a purely symbolic MCTS approach.  The issue has more to do with
-    implementing many transforms and selectors, and the overall basic structure, rather than
-    requiring an LLM to short-circuit the search.
-
-    The new plan is to explore random playouts as a means of back-propagating information about the
-    grid state, as a form of reasoning about the search. This is somewhat similar to RAVE and heavy
-    rollouts.
-
+** GPAR
     The GPAR [[https://arxiv.org/pdf/2401.07426][paper]] includes valuable supplementary information in the Appendix, detailing their
     transformations and abstractions. Their use of multiple objects in the selection/transformation
     process differs from the original ARGA approach, which replaces the concept of dynamic
     parameter binding.  While I have developed a similar idea, and am currently working on its
     implementation, the insights from the GPAR paper are extremely helpful. And furthermore
     hopefully McARGA can achieve a comparable result.
+
