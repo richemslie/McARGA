@@ -8,6 +8,7 @@ transformation_ops = {"default": ["remove_object", "update_colour", "move_object
                                      "hollow_rectangle", "fill_rectangle", "reflect_axis"],
 
                       "scg": ["remove_object", "update_colour"],
+                      "lrg": ["remove_object", "update_colour", "add_border_around_object", "hollow_rectangle"],
 
                       "vcg_nb": ["remove_object", "update_colour", "move_object",
                                  "extend_object", "move_object_max"],

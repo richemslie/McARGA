@@ -204,8 +204,8 @@ class AbstractionFactory:
                "vcg_nb": "vertical_connected_graph_no_background",
                "hcg_nb": "horizontal_connected_graph_no_background",
 
-               "na": "get_no_abstraction_graph",
-               #"lrg": "get_largest_rectangle_graph"
+               "na": "no_abstraction_graph",
+               "lrg": "largest_rectangle_graph"
                }
 
         # note: mcg - would be just one big blob... so we need a background for mcg to work
@@ -357,7 +357,7 @@ class AbstractionFactory:
         builder = Builder(ga)
 
         for colour_coords in connected_objects(ga.original_grid,
-                                               False, do_diagonals, bg_colour=ga.really_most_common_colour):
+                                               False, do_diagonals, bg_colour=ga.background_colour):
             builder.add_multi(list(colour_coords))
 
         return builder
@@ -418,7 +418,7 @@ class AbstractionFactory:
 
         return builder
 
-    def get_no_abstraction_graph(self, ga: GraphAbstraction):
+    def no_abstraction_graph(self, ga: GraphAbstraction):
         """
         return an abstracted graph where a node is defined as:
         the entire graph as one multi-colour node.
@@ -434,6 +434,31 @@ class AbstractionFactory:
         # so looks like the others
         fake_index = (0, 0)
         ga.add_object(fake_index, ArcMultiObject(fake_index, colour_coords))
+
+        return builder
+
+    def largest_rectangle_graph(self, ga: GraphAbstraction):
+        from . import largest_rect
+        builder = Builder(ga)
+
+        for colour in ga.all_colours:
+            if colour == ga.background_colour:
+                continue
+
+            coords = largest_rect.get_colour_coords(ga.original_grid, colour)
+            rectangles, lines, pixels = largest_rect.decompose_coords(coords, ga.width, ga.height)
+
+            # first add in any rectangles of size >= 4
+            for r in rectangles:
+                builder.add(colour, list(r.coords()))
+
+            # then add in any rectangles of size >= 2
+            for l in lines:
+                builder.add(colour, list(l.coords()))
+
+            # then the remainder is loose pixels, add them
+            for p in pixels:
+                builder.add(colour, [p])
 
         return builder
 

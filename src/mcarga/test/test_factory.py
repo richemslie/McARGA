@@ -560,24 +560,41 @@ def test_abstraction_edge_preservation():
 
 
 def test_get_largest_rectangle_graph():
-    pytest.skip("TODO")
     grid = [
         [1, 1, 1, 0],
         [1, 1, 1, 0],
         [1, 1, 1, 2],
         [0, 0, 2, 2]]
 
-    grid = Grid(grid)
-    print()
-    print(ga.grid)
-
-    ga = factory.create("scg_nb", grid)
+    ga = factory.create("lrg", grid)
 
     # there are 3 rectangles
-    assert len(lrg.graph.nodes) == 3
-    sizes = [data['size'] for _, data in lrg.graph.nodes(data=True)]
-    sizes.sort()
+    assert len(ga.objs) == 3
 
-    # size is for 2 reds (it forms two seperate rectangles from shape)..
-    # black is ignored
-    assert sizes == [1, 2, 9]
+    assert get_colour_counts(ga) == {1: 1, 2: 2}
+
+    o = ga.get_obj((1, 0))
+    assert o.size == 9
+
+    assert ga.undo_abstraction() == ga.original_grid
+
+
+def test_get_largest_rectangle_graph2():
+    grid = [
+        [0, 1, 1, 0],
+        [1, 1, 1, 0],
+        [2, 1, 1, 2],
+        [1, 1, 1, 2]]
+
+    ga = factory.create("lrg", grid)
+
+    # there are 3 rectangles
+    assert len(ga.objs) == 5
+
+    assert get_colour_counts(ga) == {1: 3, 2: 2}
+
+    # just happen largest rect defined first
+    o = ga.get_obj((1, 0))
+    assert o.size == 8
+
+    assert ga.undo_abstraction() == ga.original_grid

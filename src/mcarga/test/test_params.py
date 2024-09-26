@@ -1,3 +1,5 @@
+import pytest
+
 from competition import loader
 from competition.runner import show_task
 

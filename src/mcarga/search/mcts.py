@@ -42,12 +42,12 @@ class SearchStatus(BaseEnum):
 class Config:
     verbose_create_child: bool = False
 
-    abstractions: List[str] = ("scg_nb", "scg_nb_dg", "scg_nb_s1", "scg_nb_s2", "mcg_nb", "scg", "vcg_nb", "na")
+    abstractions: List[str] = ("scg_nb", "scg_nb_dg", "scg_nb_s1", "scg_nb_s2", "mcg_nb", "scg","lrg", "vcg_nb", "na")
 
     expand_children_max: int = 500
 
-    # this makes testing easier, XXX and also i think the filters need a revamp
-    do_combined_filters: bool = True
+    # this makes testing easier
+    do_combined_filters: bool = False
 
     # maximum time limit for search, in seconds.
     time_limit: int = 60

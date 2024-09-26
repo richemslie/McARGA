@@ -1,5 +1,3 @@
-from mcarga.statemachine.graph_abstraction import GraphAbstraction
-
 class Rectangle:
     def __init__(self, xmin, ymin, xmax, ymax):
         self.xmin = xmin
@@ -69,7 +67,7 @@ def find_largest_rectangles(coords, width, height, min_size, allow_lines=False):
 
 def get_colour_coords(grid, colour):
     """Extract coordinates of a specific colour from the grid."""
-    return [(i, j) for j, row in enumerate(grid) for i, val in enumerate(row) if val == colour]
+    return [(i, j) for i, row in enumerate(grid) for j, val in enumerate(row) if val == colour]
 
 
 def subtract_rectangle_coords(coords, rectangles):
@@ -93,30 +91,6 @@ def decompose_coords(coords, width, height):
     pixels = subtract_rectangle_coords(coords, lines)
 
     return rectangles, lines, pixels
-
-
-def largest_rectangles_graph(ga: GraphAbstraction):
-    builder = Builder(ga)
-
-    assert ga.background_colour == 0
-
-    for colour in range(1, 10):
-        coords = get_colour_coords(colour)
-        rectangles, lines, pixels = decompose_coords(coords, ga.width, ga.height)
-
-        # first add in any rectangles of size >= 4
-        for r in rectangles:
-            builder.add(colour, r.coords())
-
-        # then add in any rectangles of size >= 2
-        for l in lines:
-            builder.add(colour, l.coords())
-
-        # then the remainder is loose pixels, add them
-        for p in pixels:
-            builder.add(colour, [p])
-
-    return builder
 
 
 def print_rectangles(grid, rectangles):

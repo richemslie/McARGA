@@ -214,4 +214,17 @@ def test_810b9b61():
     go(task, abstractions=["scg_nb_s2"])
 
 
+def test_7f4411dc():
+    # base case for lrg
+    task = get_train_task("7f4411dc")
+    go(task, abstractions=["lrg"])
+
+
+def test_91714a58():
+    # lrg, harder variant of 7f4411dc (more noisy)
+    task = get_train_task("91714a58")
+    go(task, abstractions=["lrg"])
+
+
+
 
