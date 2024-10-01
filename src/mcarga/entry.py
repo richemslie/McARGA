@@ -17,8 +17,6 @@ def go_ext(task, test_grids, **kwds):
     if conf is None:
         conf = Config(**kwds)
 
-    conf.time_limit = 1000
-
     pprinter(conf)
     engine = SearchEngine(task, conf)
 
@@ -107,7 +105,8 @@ def main():
     for task_id in sys.argv[1:]:
         temp = loader.filter_tasks(tasks, task_id)
         task = temp[0]
-        run(task, do_profiling=False, verbose_logging=True)
+        run(task, time_limit=1000,
+            do_profiling=False, verbose_logging=True)
 
 
 if __name__ == "__main__":
