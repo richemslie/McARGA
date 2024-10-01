@@ -30,7 +30,8 @@
   | 6 Sept |     47 | 3/1       | 5/12       | 7/39  | 18/42     | 12/38    |
   | 7 Sept |     51 | 5/1       | 8/11       | 8/36  | 19/39     | 12/34    |
   | 9 Sept |     55 | 7/3       | 7/6        | 7/31  | 22/38     | 15/33    |
-
+  | 1 Oct  |     58 | 4/1       | 9/5        | 9/30  | 25/38     | 16/31    |
+ 
 
 ** other solvers
    ~arga_orig : is the arga code from github repo ran for 30 minutes per task
