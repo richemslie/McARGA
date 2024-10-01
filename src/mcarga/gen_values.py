@@ -118,6 +118,12 @@ class PossibleValuesTransformations(PossibleValuesBase):
 
         return ["most", "least"] + [c for c in range(10) if c != bg_colour]
 
+    def gen_name__colour_0(self):
+        return [c for c in range(10)]
+
+    def gen_name__colour_1(self):
+        return [c for c in range(10)]
+
     def gen_name__fill_colour(self):
         return [c for c in range(10)]
 

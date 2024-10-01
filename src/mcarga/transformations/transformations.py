@@ -1,4 +1,4 @@
-from mcarga.statemachine.graph_abstraction import ArcObject
+from mcarga.statemachine.graph_abstraction import ArcObject, ArcMultiObject
 
 from mcarga.abstractions.factory import GraphBundle
 from mcarga.gen_values import PossibleValuesTransformations
@@ -41,6 +41,27 @@ class Transformations:
             return False
 
         obj.colour = colour
+        obj.update()
+        return True
+
+    def swap_colour(self, index, colour_0, colour_1):
+        """
+        swap from colour x to y
+        """
+
+        obj = self.ga.get_obj(index)
+        assert isinstance(obj, ArcMultiObject)
+
+        new_coords = []
+        for c, coord in obj.colour_coords:
+            if c == colour_0:
+                c = colour_1
+            elif c == colour_1:
+                c = colour_0
+
+            new_coords.append((c, coord))
+
+        obj.colour_coords = new_coords
         obj.update()
         return True
 

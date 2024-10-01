@@ -226,5 +226,7 @@ def test_91714a58():
     go(task, abstractions=["lrg"])
 
 
-
+def test_0d3d703e():
+    task = get_train_task("0d3d703e")
+    go(task)
 

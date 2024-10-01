@@ -16,8 +16,8 @@ transformation_ops = {"default": ["remove_object", "update_colour", "move_object
                       "hcg_nb": ["remove_object", "update_colour", "move_object",
                                  "extend_object", "move_object_max"],
 
-                      "mcg_nb": ["remove_object", "mirror_object", "rotate_object", "fill_rectangle"],
-                      "na": ["mirror_object", "rotate_object", "fill_rectangle"], }
+                      "mcg_nb": ["remove_object", "swap_colour", "mirror_object", "rotate_object", "fill_rectangle"],
+                      "na": ["mirror_object", "rotate_object", "fill_rectangle", "swap_colour"], }
 
 
 def get_ops(abstraction):
