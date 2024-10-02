@@ -218,7 +218,7 @@ def test_similar_shapes():
     '''
 
     def check_only_true(indx, valid):
-        possible_values = [0, 1, 2, "lots"]
+        possible_values = [0, 1, 2, "many"]
         possible_values.remove(valid)
         assert filters.has_similar_shapes(indx, valid)
         for v in possible_values:
@@ -250,7 +250,7 @@ def test_similar_shapes2():
     ga, filters = create_ga(sample_grid)
 
     def check_only_true(indx, valid):
-        possible_values = [0, 1, 2, "lots"]
+        possible_values = [0, 1, 2, "many"]
         possible_values.remove(valid)
         assert filters.has_similar_shapes(indx, valid)
         for v in possible_values:
@@ -260,9 +260,9 @@ def test_similar_shapes2():
     check_only_true((3, 0), 0)
 
     # check similar
-    check_only_true((1, 0), "lots")
-    check_only_true((1, 1), "lots")
-    check_only_true((2, 0), "lots")
+    check_only_true((1, 0), "many")
+    check_only_true((1, 1), "many")
+    check_only_true((2, 0), "many")
 
 
 def get_rxe_task(name, show=False):

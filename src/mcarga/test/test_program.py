@@ -383,7 +383,7 @@ def test_9edfc990():
                 (Z(FX("by_neighbour_colour", colour=1),
                    FX("by_colour", colour=0, exclude=False))
                  , T("update_colour", colour=1)))
-    p.plot(task)
+    p.run(task)
 
 
 def test_810b9b61():
@@ -392,4 +392,4 @@ def test_810b9b61():
     p = Program("scg_nb_s2",
                 (F("by_neighbour_colour", colour=0),
                  T("update_colour", colour=3)))
-    p.plot(task)
+    p.run(task)

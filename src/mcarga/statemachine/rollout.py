@@ -8,9 +8,9 @@ from mcarga.statemachine.blackboard import MatchType
 ###############################################################################
 
 def do_score(ga_in, ga_out):
-    from .scoring import simple_scorer_v2
+    from .scoring import cmp_scorer
     reconstructed = ga_in.undo_abstraction()
-    return simple_scorer_v2(reconstructed, ga_in.original_grid, ga_out.original_grid)
+    return cmp_scorer(reconstructed, ga_in.original_grid, ga_out.original_grid)
 
 
 def perform_monte_carlo(mapping, pair, max_rollout_distance=4):
