@@ -38,7 +38,7 @@ class Filters:
             if count > 2:
                 break
 
-        if number == "lots":
+        if number == "many":
             return count > 2
         else:
             assert 0 <= number <= 2

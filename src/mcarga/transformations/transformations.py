@@ -438,7 +438,7 @@ class Transformations:
         self.ga.remove_object(index)
         return True
 
-    def insert(self, node, object_id, point, relative_pos: RelativePosition):
+    def insert(self, index, object_id, point, relative_pos: RelativePosition):
         """
         insert some pattern identified by object_id at some location,
         the location is defined as, the relative position between the given node and point.
@@ -465,8 +465,8 @@ class Transformations:
                 point = (self.ga.height - 1, 0)
             elif point == RelativeTo.BOTTOM_RIGHT:
                 point = (self.ga.height - 1, self.ga.width - 1)
-        if object_id == -1:
 
+        if object_id == -1:
             # special id for dynamic objects, which uses the given nodes as objects
             object = self.graph.nodes[node]
         else:
