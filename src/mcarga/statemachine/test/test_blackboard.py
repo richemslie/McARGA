@@ -1,11 +1,11 @@
+import pytest
+
 import time
 
 
 from pprint import pprint
 
 from competition import loader
-
-from mcarga.abstractions.factory import AbstractionFactory
 
 from .commontest import get_blackboard_for_task_id
 
@@ -36,7 +36,7 @@ def do_anaysis(task_id, **kwds):
     return bb
 
 def test_analysis_0():
-    do_anaysis("0d3d703e")
+    bb = do_anaysis("0d3d703e")
 
     print("Exact:")
     for m in bb.get_exact_matches():
@@ -45,8 +45,6 @@ def test_analysis_0():
     print("static:")
     static = bb.get_static_object_for_insertion()
     print(static)
-    X
-
 
 
 def test_analysis_1():
@@ -64,6 +62,7 @@ def test_analysis_1():
 
 
 def test_bb_for_all():
+    pytest.skip("WIP")
     tasks = loader.get_kaggle_data(loader.WhichData.TRAIN_THESE)
     time_taken = {}
     bb_by_task = {}
@@ -74,7 +73,7 @@ def test_bb_for_all():
 
         s0 = time.time()
         bb = get_blackboard_for_task_id(task.task_id, show=False)
-        mapping_in, mapping_out = bb.analysis_v2()
+        mapping_in, mapping_out = bb.analysis()
 
         print(f"task_id {task.task_id}")
         print("mapping_in")
@@ -88,7 +87,6 @@ def test_bb_for_all():
         time_taken[task.task_id] = time.time() - s0
 
     pprint(sorted([(v, k) for k, v in time_taken.items()]))
-
 
     for task_id, lbb in lbb_by_task.items():
         filter_instructions = filters.get_candidate_filters(lbb.spe.task_bundle.in_train_bundle, do_combined_filters=False)

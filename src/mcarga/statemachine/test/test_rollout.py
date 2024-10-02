@@ -11,19 +11,7 @@ from mcarga.statemachine.blackboard import Blackboard
 
 from mcarga.statemachine.rollout import perform_monte_carlo
 
-
-def get_rxe_task(name, show=True):
-    tasks = loader.get_rxe_data()
-    task = loader.filter_tasks(tasks, name)[0]
-    runner.show_task(task)
-    return task
-
-
-def get_train_task(name, show=True):
-    tasks = loader.get_kaggle_data(loader.WhichData.TRAIN)
-    task = loader.filter_tasks(tasks, name)[0]
-    runner.show_task(task)
-    return task
+from .commontest import get_rxe_task, get_train_task
 
 
 def test_get_abstraction():
@@ -62,18 +50,22 @@ def get_task_bundle(task_id, abstraction="scg_nb"):
 def test_create_blackboard():
     bundle = get_task_bundle("recolour_easy")
 
-    lbb = Blackboard(bundle)
+    bb = Blackboard(bundle)
 
-    mapping = lbb.analysis()
+    mapping = bb.analysis()
     pprint(mapping)
 
 
-def test_simple_run0():
-    bundle = get_task_bundle("recolour_easy")
+def run(task_id, abstraction=None):
+    if abstraction:
+        bundle = get_task_bundle(task_id, abstraction)
+    else:
+        bundle = get_task_bundle(task_id)
 
-    lbb = Blackboard(bundle)
-
-    mapping = lbb.analysis()
+    with Timer("Blackboard creation"):
+        bb = Blackboard(bundle)
+        bb.analysis()
+        mapping = bb.in_obj_match_mapping
 
     for indx, pair in enumerate(bundle.pairs()):
         if perform_monte_carlo(mapping[indx], pair):
@@ -82,12 +74,19 @@ def test_simple_run0():
             print("FAIL")
 
 
+def test_simple_run0():
+    run("recolour_easy")
+
+
+
+
+
 def test_simple_run1():
     bundle = get_task_bundle("recolour_two_objs")
 
-    lbb = Blackboard(bundle)
+    bb = Blackboard(bundle)
 
-    mapping = lbb.analysis()
+    mapping = bb.analysis()
 
     for indx, pair in enumerate(bundle.pairs()):
         if perform_monte_carlo(mapping[indx], pair):
@@ -99,9 +98,9 @@ def test_simple_run1():
 def test_simple_run2():
     bundle = get_task_bundle("my_first_test")
 
-    lbb = Blackboard(bundle)
+    bb = Blackboard(bundle)
 
-    mapping = lbb.analysis()
+    mapping = bb.analysis()
 
     for indx, pair in enumerate(bundle.pairs()):
         if perform_monte_carlo(mapping[indx], pair):
@@ -113,9 +112,9 @@ def test_simple_run2():
 def test_simple_run3():
     bundle = get_task_bundle("test2")
 
-    lbb = Blackboard(bundle)
+    bb = Blackboard(bundle)
 
-    mapping = lbb.analysis()
+    mapping = bb.analysis()
 
     for indx, pair in enumerate(bundle.pairs()):
         if perform_monte_carlo(mapping[indx], pair):
@@ -124,17 +123,14 @@ def test_simple_run3():
             print("FAIL")
 
 
-def test_hard_but_actually_easy():
-    # first mcts search is #tis 92 / *instrs 3864
-    # insane!  - DID timeout, and that is just one abstraction
-
+def test_zzz():
     bundle = get_task_bundle("6455b5f5", "scg")
 
     with Timer("Blackboard creation"):
-        lbb = Blackboard(bundle)
+        bb = Blackboard(bundle)
 
-    with Timer("lbb.analysis"):
-        mapping = lbb.analysis()
+    with Timer("bb.analysis"):
+        mapping = bb.analysis()
 
     for indx, pair in enumerate(bundle.pairs()):
 

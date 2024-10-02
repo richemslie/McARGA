@@ -5,7 +5,7 @@ from mcarga.abstractions.factory import AbstractionFactory
 from mcarga.statemachine.blackboard import Blackboard
 
 
-def get_rxe_task(name, show=True):
+def get_rxe_task(name, show=False):
     tasks = loader.get_rxe_data()
     task = loader.filter_tasks(tasks, name)[0]
     if show:
@@ -13,7 +13,7 @@ def get_rxe_task(name, show=True):
     return task
 
 
-def get_train_task(name, show=True):
+def get_train_task(name, show=False):
     tasks = loader.get_kaggle_data(loader.WhichData.TRAIN)
     task = loader.filter_tasks(tasks, name)[0]
     if show:
@@ -21,7 +21,7 @@ def get_train_task(name, show=True):
     return task
 
 
-def get_task_bundle(task_id, abstraction="scg_nb", show=True):
+def get_task_bundle(task_id, abstraction="scg_nb", show=False):
     try:
         task = get_rxe_task(task_id, show=show)
     except IndexError:
@@ -36,7 +36,7 @@ def get_task_bundle(task_id, abstraction="scg_nb", show=True):
     return task_bundle
 
 
-def get_blackboard_for_task_id(task_id, abstraction="scg_nb", show=True):
+def get_blackboard_for_task_id(task_id, abstraction="scg_nb", show=False):
     task_bundle = get_task_bundle(task_id, abstraction=abstraction, show=show)
     return Blackboard(task_bundle)
 
