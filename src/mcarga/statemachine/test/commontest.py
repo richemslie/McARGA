@@ -2,7 +2,7 @@ from competition import loader
 from competition import runner
 
 from mcarga.abstractions.factory import AbstractionFactory
-from mcarga.blackboard import Blackboard
+from mcarga.statemachine.blackboard import Blackboard
 
 
 def get_rxe_task(name, show=True):

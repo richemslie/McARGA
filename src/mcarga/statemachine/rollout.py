@@ -2,7 +2,6 @@ import random
 
 from mcarga.transformations.transformations import Transformations
 
-from mcarga.blackboard import MatchType
 
 
 def simple_scorer(in_grid, out_grid, bg_colour):

@@ -7,9 +7,9 @@ from mcarga.core.utils import Timer
 
 from mcarga.abstractions.factory import AbstractionFactory
 
-from mcarga.blackboard import LocalBlackboard
+from mcarga.statemachine.blackboard import Blackboard
 
-from mcarga.rollout import perform_monte_carlo
+from mcarga.statemachine.rollout import perform_monte_carlo
 
 
 def get_rxe_task(name, show=True):
@@ -62,7 +62,7 @@ def get_task_bundle(task_id, abstraction="scg_nb"):
 def test_create_blackboard():
     bundle = get_task_bundle("recolour_easy")
 
-    lbb = LocalBlackboard(bundle)
+    lbb = Blackboard(bundle)
 
     mapping = lbb.analysis()
     pprint(mapping)
@@ -71,7 +71,7 @@ def test_create_blackboard():
 def test_simple_run0():
     bundle = get_task_bundle("recolour_easy")
 
-    lbb = LocalBlackboard(bundle)
+    lbb = Blackboard(bundle)
 
     mapping = lbb.analysis()
 
@@ -85,7 +85,7 @@ def test_simple_run0():
 def test_simple_run1():
     bundle = get_task_bundle("recolour_two_objs")
 
-    lbb = LocalBlackboard(bundle)
+    lbb = Blackboard(bundle)
 
     mapping = lbb.analysis()
 
@@ -99,7 +99,7 @@ def test_simple_run1():
 def test_simple_run2():
     bundle = get_task_bundle("my_first_test")
 
-    lbb = LocalBlackboard(bundle)
+    lbb = Blackboard(bundle)
 
     mapping = lbb.analysis()
 
@@ -113,7 +113,7 @@ def test_simple_run2():
 def test_simple_run3():
     bundle = get_task_bundle("test2")
 
-    lbb = LocalBlackboard(bundle)
+    lbb = Blackboard(bundle)
 
     mapping = lbb.analysis()
 
@@ -130,8 +130,8 @@ def test_hard_but_actually_easy():
 
     bundle = get_task_bundle("6455b5f5", "scg")
 
-    with Timer("LocalBlackboard creation"):
-        lbb = LocalBlackboard(bundle)
+    with Timer("Blackboard creation"):
+        lbb = Blackboard(bundle)
 
     with Timer("lbb.analysis"):
         mapping = lbb.analysis()
